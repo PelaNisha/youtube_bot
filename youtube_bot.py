@@ -28,10 +28,12 @@ def get_channel_avg_views_and_subs():
 				total_subs = initial_respons['items'][0]['statistics']['subscriberCount']
 				total_view_count = initial_respons['items'][0]['statistics']['viewCount']
 				avg_views= int(total_view_count)/int(total_videos) 		# average views in all channels
-				info_dict = {'name':channel_name,'avg_view':str(num_formatting(avg_views)),'subcribers_count':str(total_subs)}
+				info_dict = {'name':channel_name,'avg_view':str(num_formatting(avg_views)),'subcribers_count':int(total_subs)}
 				final_list.append(info_dict)
 
-	return final_list
+	# sort the final_list according to the subscribers count
+	li = sorted(final_list, key=lambda i: i['subcribers_count'],reverse=True)
+	return li
 
 
 # function to give tags for numbers like thousand, million,etc
