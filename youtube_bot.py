@@ -28,14 +28,14 @@ def get_channel_avg_views_and_subs():
 				total_subs = initial_respons['items'][0]['statistics']['subscriberCount']
 				total_view_count = initial_respons['items'][0]['statistics']['viewCount']
 				avg_views= int(total_view_count)/int(total_videos) 		# average views in all channels
-				info_dict = {'name':channel_name,'avg_view':str(get_avg(avg_views)),'subcribers_count':str(total_subs)}
+				info_dict = {'name':channel_name,'avg_view':str(num_formatting(avg_views)),'subcribers_count':str(total_subs)}
 				final_list.append(info_dict)
 
 	return final_list
 
 
 # function to give tags for numbers like thousand, million,etc
-def get_avg(avg_view):
+def num_formatting(avg_view):
 	units = ['', 'K', 'M', 'G', 'T', 'P']
 	k = 1000.0
 	magnitude = int(floor(log(avg_view, k)))
@@ -51,10 +51,9 @@ def save_to_file(final_result):
 # opens file.json, reads it and parse according to use
 def read_data():
 	with open('file.json', "r") as f:
-		data = json.load(f)
+		data = json.load(f
 		for i in range(0, len(data)):
-			print(data[i]['name']) # returns name of each channel
-			
+			print(data[i]['name'])
 
 result = get_channel_avg_views_and_subs()
 save_to_file(result)
