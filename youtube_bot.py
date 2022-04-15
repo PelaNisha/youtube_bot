@@ -53,7 +53,7 @@ def save_to_file(final_result):
 # opens file.json, reads it and parse according to use
 def read_data():
 	with open('file.json', "r") as f:
-		data = json.load(f
+		data = json.load(f)
 		for i in range(0, len(data)):
 			print(data[i]['name'])
 
