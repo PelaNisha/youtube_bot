@@ -27,8 +27,8 @@ def get_playlist():
 
 				# to return the channel_id of the channels
 				channel_id_request = youtube.channels().list(
-				part = 'contentDetails, statistics',
-				forUsername = channel_name
+					part = 'contentDetails, statistics',
+					forUsername = channel_name
 				)
 				channel_id_respons= channel_id_request.execute()
 				channel_id = channel_id_respons['items'][0]['id']				
@@ -45,8 +45,11 @@ def get_playlist():
 					playlist_date = item['snippet']['publishedAt']
 					description = item['snippet']['description']		
 					playlist_id = item['id'] # playlist id to get all the videos in a playlist
-					playlist_videos = get_video_titles_and_duration(get_videos_of_playlists(playlist_id)) # get the videos using the get_video_titles_and_duration funtion
-					info_dict = {'published_title':playlist_published_title,'playlist date':playlist_date,'description':description, 'playlist_videos':playlist_videos}
+
+					# get the videos using the get_video_titles_and_duration funtion
+					playlist_videos = get_video_titles_and_duration(get_videos_of_playlists(playlist_id)) 
+					info_dict = {'published_title':playlist_published_title,'playlist date':playlist_date,
+								'description':description, 'playlist_videos':playlist_videos}
 					final_list.append(info_dict)
 					
 	# sort the final_list according to the playlist_date
@@ -58,9 +61,9 @@ def get_playlist():
 def get_videos_of_playlists(playlist_id):
 	video_id_list = []
 	playlist_video_request = youtube.playlistItems().list(
-					part="contentDetails",
-					playlistId=playlist_id,
-					maxResults=5
+		part="contentDetails",
+		playlistId=playlist_id,
+		maxResults=5
 	)
 	playlist_video_response = playlist_video_request.execute()
 	for item in playlist_video_response['items']:
@@ -74,8 +77,8 @@ def get_video_titles_and_duration(video_ids):
 
 	# make the request for videos
 	video_request = youtube.videos().list(
-					part="contentDetails,snippet",
-					id = ','.join(video_ids)
+		part="contentDetails,snippet",
+		id = ','.join(video_ids)
 	)
 	video_response = video_request.execute()
 
