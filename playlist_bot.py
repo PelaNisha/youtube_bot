@@ -49,7 +49,7 @@ def get_playlist():
 					# get the videos using the get_video_titles_and_duration funtion
 					playlist_videos = get_video_titles_and_duration(get_videos_of_playlists(playlist_id)) 
 					info_dict = {'published_title':playlist_published_title,'playlist date':playlist_date,
-								'description':description, 'playlist_videos':playlist_videos}
+						      'description':description, 'playlist_videos':playlist_videos}
 					final_list.append(info_dict)
 					
 	# sort the final_list according to the playlist_date
